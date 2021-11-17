@@ -1,12 +1,10 @@
 package com.example.previewpicture.nine.activity;
 
-import android.app.Activity;
+
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 
-import com.blankj.utilcode.util.ScreenUtils;
 import com.example.previewpicture.ImageUrlConfig;
 import com.example.previewpicture.R;
 import com.example.previewpicture.bean.UserViewInfo;
@@ -30,12 +28,12 @@ public class SingleImgActivity  extends BaseActivity {
             public void onClick(View v) {
                 List<UserViewInfo> list=new ArrayList<>();
                 Rect bounds = new Rect();
-                bounds.left=ScreenUtils.getScreenWidth()/2;
-                bounds.top= ScreenUtils.getScreenHeight()/2;
-                bounds.right=ScreenUtils.getScreenWidth()/2;
-                bounds.bottom=ScreenUtils.getScreenHeight()/2;
+//                bounds.left=ScreenUtils.getScreenWidth()/2;
+//                bounds.top= ScreenUtils.getScreenHeight()/2;
+//                bounds.right=ScreenUtils.getScreenWidth()/2;
+//                bounds.bottom=ScreenUtils.getScreenHeight()/2;
                 UserViewInfo info=new UserViewInfo(  ImageUrlConfig.getUrls().get(0));
-                info.setBounds(bounds);
+               // info.setBounds(bounds);
 
                 list.add(info);
                 GPreviewBuilder.from(SingleImgActivity.this)

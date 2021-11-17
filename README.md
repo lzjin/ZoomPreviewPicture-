@@ -22,7 +22,7 @@
 通过Gradle抓取:
  
 ```grade
-   implementation 'com.github.lzjin:ZoomPreviewPicture-:2.3.72'
+   implementation 'com.github.lzjin:ZoomPreviewPicture-:2.3.73'
 ```
  
 ###  1.本项目类库依赖第三库，（）
