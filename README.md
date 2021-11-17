@@ -22,7 +22,7 @@
 通过Gradle抓取:
  
 ```grade
-  compile 'com.ycjiang:ImagePreview:2.3.7'
+  compile 'com.ycjiang:ImagePreview:2.3.71'
 ```
  
 ###  1.本项目类库依赖第三库，（）

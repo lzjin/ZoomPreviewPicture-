@@ -9,6 +9,7 @@ import com.example.previewpicture.custom.GridViewCustomActivity;
 import com.example.previewpicture.list.GridView2Activity;
 import com.example.previewpicture.list.ListView2Activity;
 import com.example.previewpicture.nine.activity.GridStyleActivity;
+import com.example.previewpicture.nine.activity.SingleImgActivity;
 import com.example.previewpicture.pager.ViewPagerActivity;
 import com.example.previewpicture.rec.RecycleViewActivity;
 import com.example.previewpicture.video.VideoViewActivity;
@@ -19,6 +20,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        findViewById(R.id.bt)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, SingleImgActivity.class);
+                        startActivity(intent);
+
+                    }
+                });
         findViewById(R.id.button)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -16,6 +16,11 @@
         app:title="主页"
 
         app:titleTextColor="@android:color/white" />
+    <Button
+        android:id="@+id/bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="单图" />
 
     <Button
         android:textAllCaps="false"

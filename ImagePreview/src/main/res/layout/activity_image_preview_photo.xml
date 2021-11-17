@@ -4,6 +4,7 @@
     android:background="@android:color/transparent"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <com.previewlibrary.wight.PhotoViewPager
         android:background="@android:color/transparent"
         android:id="@+id/viewPager"
@@ -23,6 +24,7 @@
         android:text="1/2"
          >
     </TextView>
+
     <com.previewlibrary.wight.BezierBannerView
         android:id="@+id/bezierBannerView"
         android:layout_width="wrap_content"
@@ -34,7 +36,17 @@
         app:selectedColor="@android:color/white"
         app:unSelectedColor="@android:color/darker_gray"
         app:spacing="6dp"
-        android:layout_gravity="bottom|center_vertical|center_horizontal"
-        />
+        android:layout_gravity="bottom|center_vertical|center_horizontal" />
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:src="@drawable/ic_back_round"
+        android:textColor="#000000" />
 
 </FrameLayout>

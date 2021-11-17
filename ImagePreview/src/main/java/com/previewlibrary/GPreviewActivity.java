@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.previewlibrary.enitity.IThumbViewInfo;
@@ -50,6 +51,11 @@ public class GPreviewActivity extends FragmentActivity {
     /***默认显示***/
     private boolean isShow = true;
 
+    /*** 显示返回图片**/
+    private ImageView ivBack;
+
+    /***默认显示返回 ***/
+    private boolean isShowBack = true;
     @CallSuper
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,9 +97,11 @@ public class GPreviewActivity extends FragmentActivity {
         currentIndex = getIntent().getIntExtra("position", -1);
         type = (GPreviewBuilder.IndicatorType) getIntent().getSerializableExtra("type");
         isShow = getIntent().getBooleanExtra("isShow", true);
+        isShowBack = getIntent().getBooleanExtra("isShowBack", true);
         int duration = getIntent().getIntExtra("duration", 300);
-         boolean isFullscreen=getIntent().getBooleanExtra("isFullscreen",false);
+        boolean isFullscreen=getIntent().getBooleanExtra("isFullscreen",false);
         boolean isScale=getIntent().getBooleanExtra("isScale",false);
+
         SmoothImageView.setFullscreen(isFullscreen);
         SmoothImageView.setIsScale(isScale);
          if (isFullscreen){
@@ -118,7 +126,7 @@ public class GPreviewActivity extends FragmentActivity {
      * @param className    显示Fragment
      **/
     protected void iniFragment(List<IThumbViewInfo> imgUrls, int currentIndex, Class<? extends BasePhotoFragment> className) {
-        if (imgUrls != null) {
+        if (imgUrls != null && imgUrls.size()>0) {
             int size = imgUrls.size();
             for (int i = 0; i < size; i++) {
                 fragments.add(BasePhotoFragment.
@@ -139,6 +147,9 @@ public class GPreviewActivity extends FragmentActivity {
      */
     @SuppressLint("StringFormatMatches")
     private void initView() {
+        ivBack=findViewById(R.id.iv_back);
+        ivBack.setVisibility(isShowBack?View.VISIBLE:View.GONE);
+
         viewPager = findViewById(R.id.viewPager);
         //viewPager的适配器
         PhotoPagerAdapter adapter = new PhotoPagerAdapter(getSupportFragmentManager());
@@ -185,8 +196,10 @@ public class GPreviewActivity extends FragmentActivity {
             @Override
             public void onGlobalLayout() {
                 viewPager.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                BasePhotoFragment fragment = fragments.get(currentIndex);
-                fragment.transformIn();
+                if(fragments!=null&& currentIndex<fragments.size()){
+                    BasePhotoFragment fragment = fragments.get(currentIndex);
+                    fragment.transformIn();
+                }
             }
         });
 
@@ -195,29 +208,37 @@ public class GPreviewActivity extends FragmentActivity {
 
     /***退出预览的动画***/
     public void transformOut() {
-        if (isTransformOut) {
-            return;
-        }
-        getViewPager().setEnabled(false);
-        isTransformOut = true;
-        int currentItem = viewPager.getCurrentItem();
-        if (currentItem < imgUrls.size()) {
-            BasePhotoFragment fragment = fragments.get(currentItem);
-            if (ltAddDot != null) {
-                ltAddDot.setVisibility(View.GONE);
-            } else {
-                bezierBannerView.setVisibility(View.GONE);
+        try {
+            if (isTransformOut) {
+                return;
             }
-            fragment.changeBg(Color.TRANSPARENT);
-            fragment.transformOut(new SmoothImageView.onTransformListener() {
-                @Override
-                public void onTransformCompleted(SmoothImageView.Status status) {
-                    getViewPager().setEnabled(true);
-                    exit();
+            if(getViewPager()!=null){
+                getViewPager().setEnabled(false);
+            }
+            isTransformOut = true;
+            int currentItem = viewPager.getCurrentItem();
+            if (currentItem<fragments.size()) {
+                BasePhotoFragment fragment = fragments.get(currentItem);
+                if (ltAddDot != null) {
+                    ltAddDot.setVisibility(View.GONE);
+                } else {
+                    bezierBannerView.setVisibility(View.GONE);
                 }
-            });
-        } else {
-            exit();
+                fragment.changeBg(Color.TRANSPARENT);
+                fragment.transformOut(new SmoothImageView.onTransformListener() {
+                    @Override
+                    public void onTransformCompleted(SmoothImageView.Status status) {
+                        if(getViewPager()!=null){
+                            getViewPager().setEnabled(true);
+                        }
+                        exit();
+                    }
+                });
+            } else {
+                exit();
+            }
+        }catch (Exception e){
+            finish();
         }
     }
 

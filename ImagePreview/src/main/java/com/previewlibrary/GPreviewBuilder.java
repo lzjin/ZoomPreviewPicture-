@@ -219,6 +219,15 @@ public final class GPreviewBuilder {
         return this;
     }
     /***
+     *  设置返回图片
+     * @param isShowBack    true false
+     * @return GPreviewBuilder
+     * **/
+    public GPreviewBuilder setBack(boolean isShowBack) {
+        intent.putExtra("isShowBack", isShowBack);
+        return this;
+    }
+    /***
      *  设置是视频点击播放回调
      * @return GPreviewBuilder
      * **/

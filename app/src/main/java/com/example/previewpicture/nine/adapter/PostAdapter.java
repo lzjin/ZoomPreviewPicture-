@@ -105,10 +105,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 View itemView = mNglContent.getChildAt(i);
                 Rect bounds = new Rect();
                 if (itemView != null) {
+                    //坐标位置
                     ImageView thumbView = (ImageView) itemView;
                     thumbView.getGlobalVisibleRect(bounds);
                 }
                 list.get(i).setBounds(bounds);
+                Log.d("onItemImageClick","------l="+bounds.left+" t=" +bounds.top + " r=" +bounds.right +" b=" +bounds.bottom);
                 list.get(i).setUrl(list.get(i).getUrl());
             }
 
